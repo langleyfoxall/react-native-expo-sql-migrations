@@ -5,19 +5,19 @@ export default class CreateBlueprint extends BaseBlueprint{
 
     text(columnName){
         const column = new Column(columnName, 'TEXT');
-        this.columns.push(column)
+        this.columns.push(column);
         return column;
     }
 
-    integer(columnName, nullable = false){
+    integer(columnName){
         const column = new Column(columnName, 'INTEGER');
-        this.columns.push(column)
+        this.columns.push(column);
         return column;
     }
 
-    real(columnName, nullable = false){
+    real(columnName){
         const column = new Column(columnName, 'REAL');
-        this.columns.push(column)
+        this.columns.push(column);
         return column;
     }
 
