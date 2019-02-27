@@ -1,5 +1,5 @@
 {
-  "name": "react-native-expo-sql-migrations",
+  "name": "@langleyfoxall/react-native-expo-sql-migrations",
   "version": "1.0.0",
   "description": "Eloquent like migrations for SQLite in Expo",
   "main": "src/index.js",
