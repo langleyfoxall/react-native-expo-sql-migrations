@@ -1,5 +1,5 @@
-import ExpoMigration from 'ExpoMigration';
-import BaseMigration from 'BaseMigration';
+import ExpoMigration from './ExpoMigration';
+import BaseMigration from './BaseMigration';
 
 export default {
     ExpoMigration,
