@@ -1,0 +1,34 @@
+{
+  "name": "react-native-expo-sql-migrations",
+  "version": "1.0.0",
+  "description": "Eloquent like migrations for SQLite in Expo",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "node ./node_modules/@babel/cli/bin/babel src/ --out-dir dist/",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/langleyfoxall/react-native-expo-sql-migrations.git"
+  },
+  "keywords": [
+    "sqlite",
+    "expo",
+    "react",
+    "native",
+    "sql",
+    "rn"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.2.3"
+  },
+  "author": "Niles Butler <niles@langleyfoxall.co.uk>",
+  "license": "LGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/langleyfoxall/react-native-expo-sql-migrations/issues"
+  },
+  "homepage": "https://github.com/langleyfoxall/react-native-expo-sql-migrations#readme"
+}
