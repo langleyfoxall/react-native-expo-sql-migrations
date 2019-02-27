@@ -1,47 +1,30 @@
 import BaseBlueprint from './BaseBlueprint';
+import Column from "./Column";
 
 export default class AlertBlueprint extends BaseBlueprint{
     text(columnName, nullable = true){
-        this.columns.push({
-            name: columnName,
-            type: 'TEXT ',
-            method: 'ADD',
-            nullable,
-        })
+        const column = new Column(columnName, 'TEXT');
+        this.columns.push(column)
+        return column;
     }
 
     integer(columnName, nullable = true){
-        this.columns.push({
-            name: columnName,
-            type: 'INTEGER',
-            method: 'ADD',
-            nullable,
-        })
+        const column = new Column(columnName, 'INTEGER');
+        this.columns.push(column)
+        return column;
     }
 
     real(columnName, nullable = true){
-        this.columns.push({
-            name: columnName,
-            type: 'REAL',
-            method: 'ADD',
-            nullable,
-        })
-    }
-
-    blob(columnName, nullable = true){
-        this.columns.push({
-            name: columnName,
-            type: 'BLOB',
-            method: 'ADD',
-            nullable,
-        })
+        const column = new Column(columnName, 'REAL');
+        this.columns.push(column)
+        return column;
     }
 
     getSQL() {
         let sqlStatement = '';
 
         this.columns.forEach(column => {
-            sqlStatement += `ALTER TABLE ${this.schemaName} ${column.method} ${column.name} ${column.type}${column.nullable ? '' : ' NOT NULL'}; `;
+            sqlStatement += `ALTER TABLE ${this.schemaName} ADD COLUMN ${column.name} ${column.type}${column.constraints}; `;
         });
 
         return sqlStatement;

@@ -1,36 +1,24 @@
 import BaseBlueprint from './BaseBlueprint';
+import Column from './Column';
 
 export default class CreateBlueprint extends BaseBlueprint{
-    text(columnName, nullable = false){
-        this.columns.push({
-            name: columnName,
-            type: 'TEXT',
-            nullable,
-        })
+
+    text(columnName){
+        const column = new Column(columnName, 'TEXT');
+        this.columns.push(column)
+        return column;
     }
 
     integer(columnName, nullable = false){
-        this.columns.push({
-            name: columnName,
-            type: 'INTEGER',
-            nullable,
-        })
+        const column = new Column(columnName, 'INTEGER');
+        this.columns.push(column)
+        return column;
     }
 
     real(columnName, nullable = false){
-        this.columns.push({
-            name: columnName,
-            type: 'REAL',
-            nullable,
-        })
-    }
-
-    blob(columnName, nullable = false){
-        this.columns.push({
-            name: columnName,
-            type: 'BLOB',
-            nullable,
-        })
+        const column = new Column(columnName, 'REAL');
+        this.columns.push(column)
+        return column;
     }
 
     getInnerSQL(){
@@ -38,7 +26,7 @@ export default class CreateBlueprint extends BaseBlueprint{
         const finalIndex = this.columns.length - 1;
 
         this.columns.forEach((column, index) => {
-            innerSqlString += `${column.name} ${column.type}${column.nullable ? '' : ' NOT NULL'}`;
+            innerSqlString += `${column.name} ${column.type}${column.constrains}`;
 
             if(index !== finalIndex){
                 innerSqlString += ', ';
