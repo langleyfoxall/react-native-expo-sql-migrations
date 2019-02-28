@@ -26,7 +26,7 @@ export default class CreateBlueprint extends BaseBlueprint{
         const finalIndex = this.columns.length - 1;
 
         this.columns.forEach((column, index) => {
-            innerSqlString += `${column.name} ${column.type}${column.constrains}`;
+            innerSqlString += `${column.name} ${column.type}${column.constraints}`;
 
             if(index !== finalIndex){
                 innerSqlString += ', ';

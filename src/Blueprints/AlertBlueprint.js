@@ -24,7 +24,7 @@ export default class AlertBlueprint extends BaseBlueprint{
         let sqlStatement = '';
 
         this.columns.forEach(column => {
-            sqlStatement += `ALTER TABLE ${this.schemaName} ADD COLUMN ${column.name} ${column.type}${column.constrains}; `;
+            sqlStatement += `ALTER TABLE ${this.schemaName} ADD COLUMN ${column.name} ${column.type}${column.constraints}; `;
         });
 
         return sqlStatement;
