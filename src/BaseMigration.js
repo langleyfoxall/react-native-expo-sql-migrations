@@ -1,9 +1,8 @@
 import CreateBlueprint from './Blueprints/CreateBlueprint';
-import AlterBlueprint from './Blueprints/AlertBlueprint';
+import AlterBlueprint from './Blueprints/AlterBlueprint';
 
 export default class BaseMigration {
-
-    constructor(){
+    constructor() {
         this.blueprints = [];
     }
 
@@ -21,8 +20,9 @@ export default class BaseMigration {
      * @param schemaName
      * @param callable
      */
-    create(schemaName, callable){
+    create(schemaName, callable) {
         const blueprint = new CreateBlueprint(schemaName);
+
         callable(blueprint);
 
         this.blueprints.push(blueprint);
@@ -34,8 +34,9 @@ export default class BaseMigration {
      * @param schemaName
      * @param callable
      */
-    alter(schemaName, callable){
+    alter(schemaName, callable) {
         const blueprint = new AlterBlueprint(schemaName);
+
         callable(blueprint);
 
         this.blueprints.push(blueprint);
@@ -46,7 +47,7 @@ export default class BaseMigration {
      * migrations table so the migration is not reran.
      * @param transaction
      */
-    insertMigrationRow(transaction){
+    insertMigrationRow(transaction) {
         transaction.executeSql(
             'INSERT INTO migrations (migration_name) values (?)',
             [this.name || this.constructor.name]
@@ -59,15 +60,17 @@ export default class BaseMigration {
      * SQL statements and executed in the transaction.
      * @param transaction
      */
-    execute(transaction){
-        let sqlStatement = '';
+    execute(transaction) {
         this.migrate();
 
-        this.blueprints.forEach(blueprint => {
-            sqlStatement += blueprint.getSQL();
-        });
+        const sqlStatement = (
+            this.blueprints
+                .map(blueprint => blueprint.getSQL())
+                .join('')
+        );
 
         transaction.executeSql(sqlStatement);
+
         this.insertMigrationRow(transaction);
     }
 }

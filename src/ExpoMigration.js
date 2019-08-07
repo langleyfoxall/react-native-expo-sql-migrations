@@ -14,10 +14,12 @@ export default class ExpoMigration {
                     transaction.executeSql(
                         'CREATE TABLE IF NOT EXISTS migrations (id integer primary key not null, migration_name text);'
                     );
+
                     transaction.executeSql('select * from migrations', [], (_, { rows }) => this.completedMigrations = rows._array);
                 },
                 reject,
-                resolve);
+                resolve
+            );
         })
     }
 
@@ -37,13 +39,15 @@ export default class ExpoMigration {
                             return completedMigration.migration_name === migrationName;
                         });
 
-                        if (alreadyMigrated) {
-                            console.log(`Skipping Migration ${migrationName}`);
-                        } else {
+                        if (!alreadyMigrated) {
                             console.log(`Migrating ${migrationName}`);
                             migrationInstance.execute(transaction);
+
+                            return;
                         }
-                    })
+
+                        console.log(`Skipping Migration ${migrationName}`);
+                    });
                 },
                 reject,
                 resolve,
