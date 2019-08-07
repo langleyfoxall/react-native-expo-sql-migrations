@@ -32,7 +32,7 @@ export default class ExpoMigration {
             this.database.transaction(transaction => {
                     migrations.forEach(migration => {
                         const migrationInstance = new migration();
-                        const migrationName = migrationInstance.constructor.name;
+                        const migrationName = migrationInstance.name || migrationInstance.constructor.name;
                         const alreadyMigrated = this.completedMigrations.some(completedMigration => {
                             return completedMigration.migration_name === migrationName;
                         });
