@@ -5,27 +5,31 @@ export default class Column {
         this.constraints = '';
     }
 
-    primary(){
+    primary() {
         this.constraints += ' PRIMARY KEY';
+
         return this;
     }
 
-    unique(){
+    unique() {
         this.constraints += ' UNIQUE';
+
         return this;
     }
 
-    required(){
+    required() {
         this.constraints += ' NOT NULL';
+
         return this;
     }
 
-    default(value){
-        if(typeof value === 'string'){
+    default(value) {
+        if(typeof value === 'string') {
             value = `'${value}'`;
         }
 
         this.constraints += ` DEFAULT (${value})`;
+
         return this;
     }
 }

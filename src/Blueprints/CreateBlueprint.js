@@ -2,26 +2,31 @@ import BaseBlueprint from './BaseBlueprint';
 import Column from './Column';
 
 export default class CreateBlueprint extends BaseBlueprint{
-
-    text(columnName){
+    text(columnName) {
         const column = new Column(columnName, 'TEXT');
+
         this.columns.push(column);
+
         return column;
     }
 
-    integer(columnName){
+    integer(columnName) {
         const column = new Column(columnName, 'INTEGER');
+
         this.columns.push(column);
+
         return column;
     }
 
-    real(columnName){
+    real(columnName) {
         const column = new Column(columnName, 'REAL');
+
         this.columns.push(column);
+
         return column;
     }
 
-    getInnerSQL(){
+    getInnerSQL() {
         let innerSqlString = '';
         const finalIndex = this.columns.length - 1;
 
