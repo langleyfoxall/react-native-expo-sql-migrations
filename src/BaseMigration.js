@@ -47,7 +47,10 @@ export default class BaseMigration {
      * @param transaction
      */
     insertMigrationRow(transaction){
-        transaction.executeSql('INSERT INTO migrations (migration_name) values (?)', [this.constructor.name])
+        transaction.executeSql(
+            'INSERT INTO migrations (migration_name) values (?)',
+            [this.name || this.constructor.name]
+        )
     }
 
     /**
