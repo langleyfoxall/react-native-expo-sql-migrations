@@ -2,6 +2,11 @@ import BaseBlueprint from './BaseBlueprint';
 import Column from './Column';
 
 export default class CreateBlueprint extends BaseBlueprint{
+    constructor(schemaName, ifNotExists = false) {
+        super(schemaName);
+
+        this.ifNotExists = ifNotExists;
+    }
 
     text(columnName){
         const column = new Column(columnName, 'TEXT');
@@ -37,6 +42,8 @@ export default class CreateBlueprint extends BaseBlueprint{
     }
 
     getSQL() {
-        return `CREATE TABLE ${this.schemaName} ( ${this.getInnerSQL()} ); `;
+        const ifNotExists = this.ifNotExists ? 'IF NOT EXISTS' : '';
+
+        return `CREATE TABLE ${ifNotExists} ${this.schemaName} ( ${this.getInnerSQL()} ); `;
     }
 }
