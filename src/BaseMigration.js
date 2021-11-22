@@ -29,6 +29,19 @@ export default class BaseMigration {
     }
 
     /**
+     * Create an existing table if not exists, returns a callback with the blueprint
+     * for the user to edit.
+     * @param schemaName
+     * @param callable
+     */
+    createIfNotExists(schemaName, callable){
+        const blueprint = new CreateBlueprint(schemaName, true);
+        callable(blueprint);
+
+        this.blueprints.push(blueprint);
+    }
+
+    /**
      * Alter an existing table, returns a callback with the blueprint
      * for the user to edit.
      * @param schemaName
