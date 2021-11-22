@@ -20,9 +20,6 @@
     "sql",
     "rn"
   ],
-  "peerDependencies": {
-    "expo": "^27.0.0"
-  },
   "author": "Niles Butler <niles@langleyfoxall.co.uk>",
   "license": "LGPL-3.0",
   "bugs": {
